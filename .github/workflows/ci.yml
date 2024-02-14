@@ -35,3 +35,13 @@ jobs:
 
     - name: Build with Gradle
       run: ./gradlew build
+
+  checkStyle:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+    - name: Check Style with Ktlint
+      run: ./gradlew ktlintCheck
