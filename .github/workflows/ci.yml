@@ -36,7 +36,8 @@ jobs:
       run: ./gradlew ktlintCheck
       
   build:
-  
+
+    needs: checkStyle
     runs-on: ubuntu-latest
     if: ${{ needs.checkStyle.result == 'success' }}
     permissions:
