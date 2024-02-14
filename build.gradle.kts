@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
 plugins {
     id("org.springframework.boot") version "3.2.2"
@@ -33,6 +34,12 @@ dependencies {
     testImplementation("org.testcontainers:mongodb")
     testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:2.0.1")
     testImplementation("io.kotest:kotest-runner-junit5:5.8.0")
+}
+
+ktlint {
+    reporters {
+        reporter(ReporterType.PLAIN)
+    }
 }
 
 tasks.withType<KotlinCompile> {
