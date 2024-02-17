@@ -8,5 +8,5 @@ import org.springframework.data.mongodb.core.mapping.Document
 data class Product(
     @Id
     val id: ObjectId = ObjectId(),
-    val name: String = "",
+    val name: String,
 )

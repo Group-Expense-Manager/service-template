@@ -4,14 +4,15 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import pl.edu.agh.gem.application.ProductService
+import pl.edu.agh.gem.interfaces.rest.model.ProductResponse
 
-@RestController()
+@RestController
 @RequestMapping("api/v1")
 class ProductController(
     val productService: ProductService,
 ) {
-    @GetMapping("name")
-    fun getAll(): List<String> {
-        return productService.getAllNames().collectList().block() as ArrayList<String>
+    @GetMapping("names")
+    fun getAll(): List<ProductResponse> {
+        return productService.getAll().collectList().block() as ArrayList<ProductResponse>
     }
 }
