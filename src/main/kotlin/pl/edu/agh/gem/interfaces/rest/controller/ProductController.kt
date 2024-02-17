@@ -1,9 +1,9 @@
-package pl.edu.agh.gem.controller
+package pl.edu.agh.gem.interfaces.rest.controller
 
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import pl.edu.agh.gem.service.ProductService
+import pl.edu.agh.gem.application.ProductService
 
 @RestController()
 @RequestMapping("api/v1")

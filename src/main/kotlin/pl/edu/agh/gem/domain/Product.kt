@@ -1,4 +1,4 @@
-package pl.edu.agh.gem.model
+package pl.edu.agh.gem.domain
 
 import org.bson.types.ObjectId
 import org.springframework.data.annotation.Id
