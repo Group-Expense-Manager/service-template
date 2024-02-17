@@ -40,5 +40,4 @@ class ServiceTemplateApplicationTests(
                 .contentType(MediaType.APPLICATION_JSON),
         ).andExpectAll(status().isOk)
     }
-
 }
