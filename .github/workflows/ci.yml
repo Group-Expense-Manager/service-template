@@ -35,9 +35,7 @@ jobs:
         run: node ./.github/actions/jira-ticket-validator.js "${{ github.event.pull_request.title }}"
       
   build:
-    needs: checkStyle
     runs-on: ubuntu-latest
-    if: ${{ needs.checkStyle.result == 'success' }}
     permissions:
       contents: read
 
