@@ -34,6 +34,7 @@ dependencies {
     testImplementation("org.testcontainers:mongodb")
     testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:2.0.1")
     testImplementation("io.kotest:kotest-runner-junit5:5.8.0")
+    testImplementation("org.mockito:mockito-core:2.1.0")
 }
 
 ktlint {

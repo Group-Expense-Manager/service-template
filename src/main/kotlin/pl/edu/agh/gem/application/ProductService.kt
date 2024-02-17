@@ -1,7 +1,7 @@
-package pl.edu.agh.gem.service
+package pl.edu.agh.gem.application
 
 import org.springframework.stereotype.Service
-import pl.edu.agh.gem.repository.ProductRepository
+import pl.edu.agh.gem.infrastructure.persistence.ProductRepository
 import reactor.core.publisher.Flux
 
 @Service
