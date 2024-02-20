@@ -1,12 +1,12 @@
-package pl.edu.agh.gem.interfaces.rest.controller
+package pl.edu.agh.gem.external.controller
 
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
-import pl.edu.agh.gem.application.ProductService
-import pl.edu.agh.gem.interfaces.rest.model.ProductResponse
+import pl.edu.agh.gem.external.dto.ProductResponse
+import pl.edu.agh.gem.internal.service.ProductService
 
 @RestController
 @RequestMapping("api/v1")

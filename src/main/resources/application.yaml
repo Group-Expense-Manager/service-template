@@ -1,6 +1,4 @@
 spring:
   data:
     mongodb:
-      username: username
-      password: password
-      uri: uri
+      uri:

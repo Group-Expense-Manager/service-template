@@ -1,9 +1,9 @@
-package pl.edu.agh.gem.application
+package pl.edu.agh.gem.internal.service
 
 import org.springframework.stereotype.Service
-import pl.edu.agh.gem.domain.Product
-import pl.edu.agh.gem.infrastructure.persistence.ProductRepository
-import pl.edu.agh.gem.interfaces.rest.model.ProductResponse
+import pl.edu.agh.gem.external.dto.ProductResponse
+import pl.edu.agh.gem.internal.domain.Product
+import pl.edu.agh.gem.internal.persistence.ProductRepository
 import reactor.core.publisher.Flux
 
 @Service
