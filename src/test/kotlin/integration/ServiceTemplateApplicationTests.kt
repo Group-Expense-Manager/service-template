@@ -1,4 +1,4 @@
-package pl.edu.agh.gem.unit
+package integration
 
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -14,9 +14,9 @@ import org.testcontainers.containers.MongoDBContainer
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
 
-@SpringBootTest
 @Testcontainers
 @AutoConfigureMockMvc
+@SpringBootTest(classes = [pl.edu.agh.gem.ServiceTemplateApplication::class])
 class ServiceTemplateApplicationTests(
     @Autowired val mockMvc: MockMvc,
 ) {
