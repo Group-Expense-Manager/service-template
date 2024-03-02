@@ -2,3 +2,8 @@ spring:
   data:
     mongodb:
       uri:
+
+client:
+  url: "some/url"
+  readTimeout: 1000
+  connectTimeout: 1000
