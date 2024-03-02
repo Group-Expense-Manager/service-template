@@ -1,6 +1,6 @@
 package pl.edu.agh.gem.external.controller
 
-import org.springframework.http.HttpStatus
+import org.springframework.http.HttpStatus.OK
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseStatus
@@ -14,7 +14,7 @@ class ProductController(
     val productService: ProductService,
 ) {
     @GetMapping("names")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(OK)
     fun getAll(): List<ProductResponse> {
         return productService.getAll().collectList().block() as ArrayList<ProductResponse>
     }
