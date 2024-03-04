@@ -3,15 +3,15 @@ package pl.edu.agh.gem.external.client
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Component
 import org.springframework.web.client.RestTemplate
-import pl.edu.agh.gem.config.Settings
+import pl.edu.agh.gem.config.ExampleProperties
 
 @Component
 class OtherServiceClient(
-    @Qualifier("OtherServiceRestTemplate") val restTemplate: RestTemplate,
-    @Qualifier("SomeClient") val settings: Settings,
+    @Qualifier("ExampleRestTemplate") val restTemplate: RestTemplate,
+    val exampleProperties: ExampleProperties,
 ) {
     fun getSomeData(): String {
-        val response = restTemplate.getForObject(settings.url, String::class.java)
+        val response = restTemplate.getForObject(exampleProperties.url, String::class.java)
 
         return response ?: "No data"
     }

@@ -6,8 +6,8 @@ import org.springframework.boot.runApplication
 
 @SpringBootApplication
 @ConfigurationPropertiesScan
-class ServiceTemplateApplication
+class Application
 
 fun main(args: Array<String>) {
-    runApplication<ServiceTemplateApplication>(*args)
+    runApplication<Application>(*args)
 }
