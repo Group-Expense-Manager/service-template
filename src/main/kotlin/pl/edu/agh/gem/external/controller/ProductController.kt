@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 import pl.edu.agh.gem.external.dto.ProductResponse
+import pl.edu.agh.gem.internal.domain.Product
 import pl.edu.agh.gem.internal.service.ProductService
 
 @RestController
@@ -16,6 +17,10 @@ class ProductController(
     @GetMapping("names")
     @ResponseStatus(OK)
     fun getAll(): List<ProductResponse> {
-        return productService.getAll().collectList().block() as ArrayList<ProductResponse>
+        return productService.getAll().map { mapToProductResponse(it) }.collectList().block() as ArrayList<ProductResponse>
+    }
+
+    private fun mapToProductResponse(product: Product): ProductResponse {
+        return ProductResponse(product.name)
     }
 }
