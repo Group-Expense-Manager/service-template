@@ -9,13 +9,13 @@ import pl.edu.agh.gem.external.dto.ProductResponse
 import pl.edu.agh.gem.internal.service.ProductService
 
 @RestController
-@RequestMapping("api/v1")
+@RequestMapping("/api")
 class ProductController(
     val productService: ProductService,
 ) {
-    @GetMapping("names")
+    @GetMapping("/names")
     @ResponseStatus(OK)
     fun getAll(): List<ProductResponse> {
-        return productService.getAll().collectList().block() as ArrayList<ProductResponse>
+        return productService.getAll().map { ProductResponse.from(it) }
     }
 }
