@@ -10,14 +10,14 @@ import pl.edu.agh.gem.internal.domain.Product
 import pl.edu.agh.gem.internal.service.ProductService
 
 @RestController
-@RequestMapping("api/v1")
+@RequestMapping("/api")
 class ProductController(
     val productService: ProductService,
 ) {
-    @GetMapping("names")
+    @GetMapping("/names")
     @ResponseStatus(OK)
     fun getAll(): List<ProductResponse> {
-        return productService.getAll().map { mapToProductResponse(it) }.collectList().block() as ArrayList<ProductResponse>
+        return productService.getAll().map { mapToProductResponse(it) }
     }
 
     private fun mapToProductResponse(product: Product): ProductResponse {
