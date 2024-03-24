@@ -24,5 +24,5 @@ class ClientConfig {
 data class ExampleProperties(
     val url: String,
     val connectTimeout: Duration,
-    val readTimeout: Duration,
+    val readTimeout: Duration
 )
