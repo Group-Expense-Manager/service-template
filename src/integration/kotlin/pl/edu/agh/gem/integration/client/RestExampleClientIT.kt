@@ -4,7 +4,7 @@ import io.kotest.matchers.shouldBe
 import org.springframework.http.HttpStatus.OK
 import org.springframework.stereotype.Component
 import pl.edu.agh.gem.integration.BaseIntegrationSpec
-import pl.edu.agh.gem.integration.ability.stubExamplePostProduct
+import pl.edu.agh.gem.integration.ability.stubExampleGetProduct
 import pl.edu.agh.gem.internal.client.ExampleClient
 import pl.edu.agh.gem.util.createExampleProductRespone
 
@@ -15,7 +15,7 @@ class RestExampleClientIT(
     should("get product") {
         // given
         val exampleProductResponse = createExampleProductRespone()
-        stubExamplePostProduct(exampleProductResponse, OK)
+        stubExampleGetProduct(exampleProductResponse, exampleProductResponse.id, OK)
 
         // when
         val result = exampleClient.getProduct(exampleProductResponse.id)

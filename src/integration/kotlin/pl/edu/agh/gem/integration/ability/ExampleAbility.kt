@@ -19,17 +19,13 @@ private fun createUrl(id: String) =
 private fun createUrlForAnyId() =
     "$EXAMPLE_URL/[^/]+"
 
-fun stubExamplePostProduct(body: Any?, statusCode: HttpStatusCode = OK) {
+fun stubExamplePostProduct(statusCode: HttpStatusCode = OK) {
     wiremock.stubFor(
         post(EXAMPLE_URL)
             .willReturn(
                 aResponse()
                     .withStatus(statusCode.value())
-                    .withHeader(CONTENT_TYPE, APPLICATION_JSON_INTERNAL_VER_1)
                     .withHeader(ACCEPT, APPLICATION_JSON_INTERNAL_VER_1)
-                    .withBody(
-                        jacksonObjectMapper().writeValueAsString(body)
-                    )
             )
     )
 }
@@ -41,7 +37,6 @@ fun stubExampleGetProduct(body: Any?, id: String, statusCode: HttpStatusCode = O
                 aResponse()
                     .withStatus(statusCode.value())
                     .withHeader(CONTENT_TYPE, APPLICATION_JSON_INTERNAL_VER_1)
-                    .withHeader(ACCEPT, APPLICATION_JSON_INTERNAL_VER_1)
                     .withBody(
                         jacksonObjectMapper().writeValueAsString(body)
                     )
