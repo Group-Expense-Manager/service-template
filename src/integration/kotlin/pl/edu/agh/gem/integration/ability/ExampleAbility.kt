@@ -4,6 +4,7 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.github.tomakehurst.wiremock.client.WireMock.aResponse
 import com.github.tomakehurst.wiremock.client.WireMock.get
 import com.github.tomakehurst.wiremock.client.WireMock.post
+import com.github.tomakehurst.wiremock.client.WireMock.urlMatching
 import org.springframework.http.HttpHeaders.ACCEPT
 import org.springframework.http.HttpHeaders.CONTENT_TYPE
 import org.springframework.http.HttpStatus.OK
@@ -21,7 +22,7 @@ private fun createUrlForAnyId() =
 
 fun stubExamplePostProduct(statusCode: HttpStatusCode = OK) {
     wiremock.stubFor(
-        post(EXAMPLE_URL)
+        post(urlMatching(EXAMPLE_URL))
             .willReturn(
                 aResponse()
                     .withStatus(statusCode.value())
@@ -32,7 +33,7 @@ fun stubExamplePostProduct(statusCode: HttpStatusCode = OK) {
 
 fun stubExampleGetProduct(body: Any?, id: String, statusCode: HttpStatusCode = OK) {
     wiremock.stubFor(
-        get(createUrl(id))
+        get(urlMatching(createUrl(id)))
             .willReturn(
                 aResponse()
                     .withStatus(statusCode.value())
