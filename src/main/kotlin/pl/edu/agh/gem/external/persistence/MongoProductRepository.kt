@@ -12,9 +12,9 @@ import pl.edu.agh.gem.internal.persistence.ProductRepository
 @Repository
 class MongoProductRepository(private val mongo: MongoTemplate) : ProductRepository {
 
-    override fun find(id: String): Product {
+    override fun find(id: String): Product? {
         val query = Query.query(where(ProductEntity::id).isEqualTo(id))
-        return mongo.findOne(query,ProductEntity::class.java)?.toDomain() ?:
+        return mongo.findOne(query, ProductEntity::class.java)?.toDomain()
     }
 
     override fun save(product: Product) {

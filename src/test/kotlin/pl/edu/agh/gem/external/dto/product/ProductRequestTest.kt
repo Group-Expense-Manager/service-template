@@ -1,12 +1,24 @@
 package pl.edu.agh.gem.external.dto.product
 
-import jakarta.validation.constraints.NotBlank
-import pl.edu.agh.gem.internal.domain.Product
+import io.kotest.core.spec.style.ShouldSpec
+import io.kotest.matchers.nulls.shouldNotBeNull
+import io.kotest.matchers.shouldBe
+import pl.edu.agh.gem.util.createProductRequest
 
-data class ProductRequestTest(
-    @field:NotBlank val name: String
-) {
-    fun toDomain() = Product(
-        name = name
-    )
-}
+class ProductRequestTest : ShouldSpec({
+
+    should("map correct to Product") {
+        // given
+        val productRequest = createProductRequest(
+            name = "name"
+        )
+        // when
+        val product = productRequest.toDomain()
+
+        // then
+        product.also {
+            it.id.shouldNotBeNull()
+            it.name shouldBe "name"
+        }
+    }
+})

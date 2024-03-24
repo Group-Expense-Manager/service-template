@@ -10,8 +10,8 @@ class ProductService(
     private val productRepository: ProductRepository,
     private val exampleClient: ExampleClient
 ) {
-    fun find(id:String): Product {
-        return productRepository.findAll()
+    fun find(id: String): Product {
+        return productRepository.find(id) ?: throw MissingProductException(id)
     }
 
     fun save(product: Product) {
@@ -22,3 +22,5 @@ class ProductService(
         exampleClient.postProduct(product)
     }
 }
+
+class MissingProductException(id: String) : RuntimeException("Failed to find product with id:$id")

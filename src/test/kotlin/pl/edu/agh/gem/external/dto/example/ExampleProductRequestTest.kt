@@ -1,19 +1,24 @@
 package pl.edu.agh.gem.external.dto.example
 
-class ExampleProductRequestTest : BehaviorSpec({
-    val productRepository = mock<ProductRepository>()
-    val productService = ProductService(
-        productRepository
-    )
+import io.kotest.core.spec.style.ShouldSpec
+import io.kotest.matchers.shouldBe
+import pl.edu.agh.gem.util.createProduct
 
-    should("sth") {
+class ExampleProductRequestTest : ShouldSpec({
+
+    should("map correct to Product") {
         // given
-        whenever(productService.getAll()).thenReturn(listOf())
-
+        val product = createProduct(
+            id = "id",
+            name = "name"
+        )
         // when
-        val result = productService.getAll()
+        val exampleProductRequest = ExampleProductRequest.from(product)
 
         // then
-        result shouldHaveSize 5
+        exampleProductRequest.also {
+            it.id shouldBe "id"
+            it.name shouldBe "name"
+        }
     }
 })

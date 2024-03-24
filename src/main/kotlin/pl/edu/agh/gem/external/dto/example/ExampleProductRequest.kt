@@ -7,11 +7,10 @@ data class ExampleProductRequest(
     val name: String
 ) {
     companion object {
-        fun from(product: Product) {
+        fun from(product: Product) =
             ExampleProductResponse(
                 id = product.id,
                 name = product.name
             )
-        }
     }
 }

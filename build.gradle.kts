@@ -44,15 +44,17 @@ project.group = "pl.edu.agh.gem"
 project.version = scm.version.version
 
 configurations {
-    implementation.get().exclude("commons-logging:commons-logging")
-    implementation.get().exclude("org.slf4j:slf4j-log4j12")
-    implementation.get().exclude("org.slf4j:slf4j-jcl")
-    implementation.get().exclude("log4j:log4j")
+    compileOnly {
+        extendsFrom(configurations.annotationProcessor.get())
+    }
+}
+
+val integrationImplementation: Configuration by configurations.creating {
+    extendsFrom(configurations.testImplementation.get())
 }
 
 apply(plugin = "kotlin")
 apply(plugin = "kotlin-spring")
-apply(plugin = "maven-publish")
 apply(plugin = "java")
 apply(plugin = "kover")
 
@@ -76,10 +78,7 @@ dependencies {
     testImplementation(testlibs.bundles.testcontainers)
     testImplementation(testlibs.mockito)
     testImplementation(testlibs.archunit)
-    testImplementation("org.springframework.boot:spring-boot-starter-test") {
-        exclude(group = "org.assertj", module = "assertj-core")
-    }
-
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
     testRuntimeOnly(testlibs.junit)
 }
 
@@ -91,25 +90,6 @@ repositories {
     mavenLocal()
     mavenCentral()
 }
-
-// publishing {
-//    publications {
-//        create<MavenPublication>("mavenJava") {
-//            artifact(tasks["provisioningPackage"])
-//            artifact(tasks.distZip) {
-//                classifier = "deploy"
-//            }
-//        }
-//    }
-// }
-
-// configure<PublishingExtension> {
-//    repositories.create("example") {
-//        url = "https://artifactory.example.com"
-//    }
-//    applyDefaultPublication = false
-//    apply()
-// }
 
 kotlin {
     jvmToolchain {
@@ -123,6 +103,15 @@ ktlint {
     }
 }
 
+sourceSets {
+    create("integration") {
+        compileClasspath += project.sourceSets["main"].output + project.sourceSets["test"].output
+        runtimeClasspath += project.sourceSets["main"].output + project.sourceSets["test"].output
+        java.srcDir("src/integration/kotlin")
+        resources.srcDir("src/integration/resources")
+    }
+}
+
 tasks {
     withType<JavaCompile> {
         options.encoding = "UTF-8"
@@ -131,7 +120,6 @@ tasks {
     withType<KotlinCompile> {
         kotlinOptions {
             jvmTarget = tools.versions.jvm.get()
-            // fixes for problems with Kotlin-Java interoperability
             freeCompilerArgs = listOf("-Xjvm-default=all", "-Xemit-jvm-type-annotations")
         }
     }
@@ -146,31 +134,17 @@ tasks {
     withType<org.jlleitschuh.gradle.ktlint.tasks.BaseKtLintCheckTask> {
         workerMaxHeapSize.set("512m")
     }
-}
 
-sourceSets.create("integration") {
-    java.srcDirs("src/integration/kotlin")
-    compileClasspath += sourceSets.main.get().output + sourceSets.test.get().output
-    runtimeClasspath += sourceSets.main.get().output + sourceSets.test.get().output
-}
-
-configurations.named("integrationImplementation") {
-    extendsFrom(configurations["implementation"])
-    extendsFrom(configurations["testImplementation"])
-}
-
-val integration = tasks.create("integration", Test::class.java) {
-    description = "Runs the integration tests."
-    group = "Verification"
-    testClassesDirs = sourceSets.getByName("integration").output.classesDirs
-    classpath = sourceSets.getByName("integration").runtimeClasspath
-}
-
-tasks.build.get().dependsOn(integration)
-integration.mustRunAfter(tasks.test)
-
-idea {
-    module {
-        testSourceDirs = testSourceDirs + file("src/integration/kotlin")
+    create<Test>("integration") {
+        testClassesDirs = sourceSets["integration"].output.classesDirs
+        classpath = sourceSets["integration"].runtimeClasspath
+        mustRunAfter("test")
     }
+    check {
+        dependsOn("integration")
+    }
+}
+
+project.tasks.named("processIntegrationResources", Copy::class.java) {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }

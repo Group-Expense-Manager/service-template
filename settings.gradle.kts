@@ -40,6 +40,7 @@ dependencyResolutionManagement {
             library("kotest-assertions-json", "io.kotest", "kotest-assertions-json").versionRef("kotest")
             library("kotest-property", "io.kotest", "kotest-property").versionRef("kotest")
             library("kotest-framework-datatest", "io.kotest", "kotest-framework-datatest").versionRef("kotest")
+            library("kotest-testcontainers", "io.kotest.extensions", "kotest-extensions-testcontainers").version("2.0.2")
             library("mockito", "org.mockito.kotlin:mockito-kotlin:5.2.1")
             library("archunit", "com.tngtech.archunit:archunit-junit5:1.2.1")
 
@@ -64,7 +65,9 @@ dependencyResolutionManagement {
                 "kotest-extensions",
                 listOf(
                     "kotest-spring",
-                    "kotest-wiremock"
+                    "kotest-wiremock",
+                    "kotest-testcontainers"
+
                 )
             )
 

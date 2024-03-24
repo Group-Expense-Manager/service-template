@@ -1,20 +1,25 @@
 package pl.edu.agh.gem.external.dto.product
 
-import io.kotest.core.spec.style.BehaviorSpec
-import io.kotest.matchers.collections.shouldHaveSize
-import io.kotest.matchers.should
-import org.mockito.kotlin.whenever
+import io.kotest.core.spec.style.ShouldSpec
+import io.kotest.matchers.shouldBe
+import pl.edu.agh.gem.util.createProduct
 
-class ProductResponseTest : BehaviorSpec({
+class ProductResponseTest : ShouldSpec({
 
     should("map correct to Product") {
         // given
-        whenever(productService.getAll()).thenReturn(listOf())
+        val product = createProduct(
+            id = "id",
+            name = "name"
+        )
 
         // when
-        val result = productService.getAll()
+        val productResponse = ProductResponse.from(product)
 
         // then
-        result shouldHaveSize 5
+        productResponse.also {
+            it.id shouldBe "id"
+            it.name shouldBe "name"
+        }
     }
 })
