@@ -129,6 +129,9 @@ tasks {
         testLogging {
             exceptionFormat = TestExceptionFormat.FULL
         }
+        reports {
+            junitXml.required = true
+        }
     }
 
     withType<org.jlleitschuh.gradle.ktlint.tasks.BaseKtLintCheckTask> {
