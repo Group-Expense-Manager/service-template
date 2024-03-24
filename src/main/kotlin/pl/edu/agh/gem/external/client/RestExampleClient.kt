@@ -67,10 +67,9 @@ class RestExampleClient(
     }
 
     private fun resolveProductsAddress() =
-        exampleProperties.url
-
+        "${exampleProperties.url}/api/example"
     private fun resolveProductsAddress(productId: String) =
-        "${exampleProperties.url}/$productId"
+        "${exampleProperties.url}/api/example/$productId"
 
     private fun createHeaders() =
         HttpHeaders().apply {
