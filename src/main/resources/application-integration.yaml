@@ -1,4 +1,8 @@
+wiremock:
+  server:
+    port: 9999
+
 example:
-  url: "some/url"
+  url: http://localhost:${wiremock.server.port}
   read-timeout: 1000ms
   connect-timeout: 1000ms
