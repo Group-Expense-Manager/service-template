@@ -66,6 +66,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-aop")
     implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.springframework.retry:spring-retry")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     implementation(libs.kotlinlogging)
@@ -91,7 +92,7 @@ repositories {
     mavenCentral()
 }
 
-//publishing {
+// publishing {
 //    publications {
 //        create<MavenPublication>("mavenJava") {
 //            artifact(tasks["provisioningPackage"])
@@ -100,15 +101,15 @@ repositories {
 //            }
 //        }
 //    }
-//}
+// }
 
-//configure<PublishingExtension> {
+// configure<PublishingExtension> {
 //    repositories.create("example") {
 //        url = "https://artifactory.example.com"
 //    }
 //    applyDefaultPublication = false
 //    apply()
-//}
+// }
 
 kotlin {
     jvmToolchain {

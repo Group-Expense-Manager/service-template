@@ -31,7 +31,6 @@ dependencyResolutionManagement {
 
             library("guava", "com.google.guava:guava:33.1.0-jre")
             library("kotlinlogging", "io.github.microutils:kotlin-logging:3.0.5")
-
         }
         create("testlibs") {
             version("kotest", "5.8.1")
@@ -51,30 +50,30 @@ dependencyResolutionManagement {
             library("testcontainers-mongodb", "org.testcontainers", "mongodb").versionRef("testcontainers")
 
             bundle(
-                    "kotest-core",
-                    listOf(
-                            "kotest-runner-junit5",
-                            "kotest-assertions-core",
-                            "kotest-assertions-json",
-                            "kotest-property",
-                            "kotest-framework-datatest"
-                    )
+                "kotest-core",
+                listOf(
+                    "kotest-runner-junit5",
+                    "kotest-assertions-core",
+                    "kotest-assertions-json",
+                    "kotest-property",
+                    "kotest-framework-datatest"
+                )
             )
 
             bundle(
-                    "kotest-extensions",
-                    listOf(
-                            "kotest-spring",
-                            "kotest-wiremock"
-                    )
+                "kotest-extensions",
+                listOf(
+                    "kotest-spring",
+                    "kotest-wiremock"
+                )
             )
 
             bundle(
-                    "testcontainers",
-                    listOf(
-                            "testcontainers-core",
-                            "testcontainers-mongodb"
-                    )
+                "testcontainers",
+                listOf(
+                    "testcontainers-core",
+                    "testcontainers-mongodb"
+                )
             )
         }
     }

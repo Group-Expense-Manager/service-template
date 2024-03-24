@@ -10,7 +10,6 @@ import org.springframework.test.context.DynamicPropertySource
 import pl.edu.agh.gem.AppRunner
 import pl.edu.agh.gem.integration.environment.ProjectConfig
 
-
 @SpringBootTest(
     classes = [AppRunner::class],
     webEnvironment = RANDOM_PORT

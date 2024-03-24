@@ -1,5 +1,6 @@
 package pl.edu.agh.gem.internal.domain
 
 data class Product(
-    val name: String,
+    val id: String,
+    val name: String
 )
