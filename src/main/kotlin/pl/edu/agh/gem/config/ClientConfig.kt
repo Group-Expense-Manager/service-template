@@ -25,6 +25,4 @@ data class ExampleProperties(
     val url: String,
     val connectTimeout: Duration,
     val readTimeout: Duration,
-    val setBackOffPeriod: Duration,
-    val maxAttempts: Long
 )
