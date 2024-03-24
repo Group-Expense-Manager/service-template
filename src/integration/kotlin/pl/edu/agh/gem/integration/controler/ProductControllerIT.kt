@@ -11,33 +11,33 @@ import pl.edu.agh.gem.util.createProduct
 import pl.edu.agh.gem.util.createProductRequest
 
 class ProductControllerIT(
-        private val service: ServiceTestClient,
-        private val productRepository: ProductRepository,
+    private val service: ServiceTestClient,
+    private val productRepository: ProductRepository
 ) : BaseIntegrationSpec({
-    should("find product"){
-        //given
+    should("find product") {
+        // given
         val product = createProduct()
         productRepository.save(product)
 
-        //when
+        // when
         val response = service.findProduct(product.id)
 
-        //then
+        // then
         response shouldHaveHttpStatus OK
         response shouldHaveBody ProductResponse(
-                id = product.id,
-                name = product.name
+            id = product.id,
+            name = product.name
         )
     }
 
-    should("create product"){
-        //given
+    should("create product") {
+        // given
         val productRequest = createProductRequest()
 
-        //when
+        // when
         val response = service.createProduct(productRequest)
 
-        //then
+        // then
         response shouldHaveHttpStatus OK
     }
 })

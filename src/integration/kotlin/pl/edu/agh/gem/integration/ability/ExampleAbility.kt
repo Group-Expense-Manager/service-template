@@ -36,15 +36,15 @@ fun stubExamplePostProduct(body: Any?, statusCode: HttpStatusCode = OK) {
 
 fun stubExampleGetProduct(body: Any?, id: String, statusCode: HttpStatusCode = OK) {
     wiremock.stubFor(
-            get(createUrl(id))
-                    .willReturn(
-                            aResponse()
-                                    .withStatus(statusCode.value())
-                                    .withHeader(CONTENT_TYPE, APPLICATION_JSON_INTERNAL_VER_1)
-                                    .withHeader(ACCEPT, APPLICATION_JSON_INTERNAL_VER_1)
-                                    .withBody(
-                                            jacksonObjectMapper().writeValueAsString(body)
-                                    )
+        get(createUrl(id))
+            .willReturn(
+                aResponse()
+                    .withStatus(statusCode.value())
+                    .withHeader(CONTENT_TYPE, APPLICATION_JSON_INTERNAL_VER_1)
+                    .withHeader(ACCEPT, APPLICATION_JSON_INTERNAL_VER_1)
+                    .withBody(
+                        jacksonObjectMapper().writeValueAsString(body)
                     )
+            )
     )
 }
