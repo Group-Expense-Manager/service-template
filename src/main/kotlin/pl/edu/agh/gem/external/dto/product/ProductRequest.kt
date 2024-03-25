@@ -5,10 +5,10 @@ import pl.edu.agh.gem.internal.domain.Product
 import java.util.UUID
 
 data class ProductRequest(
-    @field:NotBlank val name: String
+    @field:NotBlank val name: String,
 ) {
     fun toDomain() = Product(
         id = UUID.randomUUID().toString(),
-        name = name
+        name = name,
     )
 }

@@ -2,6 +2,7 @@ package pl.edu.agh.gem.integration.ability
 
 import org.springframework.context.annotation.Lazy
 import org.springframework.http.HttpHeaders.ACCEPT
+import org.springframework.http.HttpHeaders.CONTENT_TYPE
 import org.springframework.stereotype.Component
 import org.springframework.test.web.reactive.server.WebTestClient.ResponseSpec
 import org.springframework.test.web.servlet.client.MockMvcWebTestClient.bindToApplicationContext
@@ -17,7 +18,7 @@ class ServiceTestClient(applicationContext: WebApplicationContext) {
         .build()
 
     fun findProduct(id: String): ResponseSpec {
-        return webClient.post()
+        return webClient.get()
             .uri(URI("/api/products/$id"))
             .header(ACCEPT, APPLICATION_JSON_INTERNAL_VER_1)
             .exchange()
@@ -26,7 +27,7 @@ class ServiceTestClient(applicationContext: WebApplicationContext) {
     fun createProduct(body: ProductRequest): ResponseSpec {
         return webClient.post()
             .uri(URI("/api/products"))
-            .header(ACCEPT, APPLICATION_JSON_INTERNAL_VER_1)
+            .header(CONTENT_TYPE, APPLICATION_JSON_INTERNAL_VER_1)
             .bodyValue(body)
             .exchange()
     }

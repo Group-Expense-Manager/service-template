@@ -17,23 +17,23 @@ import pl.edu.agh.gem.internal.service.ProductService
 @RestController
 @RequestMapping("/api/products")
 class ProductController(
-    val productService: ProductService
+    val productService: ProductService,
 ) {
 
     @GetMapping("/{id}", produces = [APPLICATION_JSON_INTERNAL_VER_1])
     @ResponseStatus(OK)
     fun findOne(
-        @PathVariable id: String
+        @PathVariable id: String,
     ): ProductResponse {
         val product = productService.find(id)
         return ProductResponse.from(product)
     }
 
-    @PostMapping(consumes = [APPLICATION_JSON_INTERNAL_VER_1], produces = [APPLICATION_JSON_INTERNAL_VER_1])
+    @PostMapping(consumes = [APPLICATION_JSON_INTERNAL_VER_1])
     @ResponseStatus(OK)
     fun createProduct(
         @Valid @RequestBody
-        productRequest: ProductRequest
+        productRequest: ProductRequest,
     ) {
         productService.save(productRequest.toDomain())
     }

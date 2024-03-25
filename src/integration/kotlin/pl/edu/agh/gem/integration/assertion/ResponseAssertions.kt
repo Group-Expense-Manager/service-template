@@ -17,7 +17,7 @@ infix fun WebTestClient.ResponseSpec.shouldHaveErrors(assertion: ErrorsResponse.
 }
 
 data class ErrorsResponse(
-    val errors: List<ErrorJson>
+    val errors: List<ErrorJson>,
 )
 
 data class ErrorJson(
@@ -25,5 +25,5 @@ data class ErrorJson(
     val message: String? = null,
     val details: String? = null,
     val path: String? = null,
-    val userMessage: String? = null
+    val userMessage: String? = null,
 )

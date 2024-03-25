@@ -12,7 +12,7 @@ import pl.edu.agh.gem.util.createProductRequest
 
 class ProductControllerIT(
     private val service: ServiceTestClient,
-    private val productRepository: ProductRepository
+    private val productRepository: ProductRepository,
 ) : BaseIntegrationSpec({
     should("find product") {
         // given
@@ -26,7 +26,7 @@ class ProductControllerIT(
         response shouldHaveHttpStatus OK
         response shouldHaveBody ProductResponse(
             id = product.id,
-            name = product.name
+            name = product.name,
         )
     }
 
@@ -40,4 +40,4 @@ class ProductControllerIT(
         // then
         response shouldHaveHttpStatus OK
     }
-})
+},)

@@ -8,7 +8,7 @@ import pl.edu.agh.gem.internal.client.ExampleClient
 import pl.edu.agh.gem.util.createExampleProductRespone
 
 class RestExampleClientIT(
-    private val exampleClient: ExampleClient
+    private val exampleClient: ExampleClient,
 ) : BaseIntegrationSpec({
     should("get product") {
         // given
@@ -24,4 +24,4 @@ class RestExampleClientIT(
             it.name shouldBe exampleProductResponse.name
         }
     }
-})
+},)

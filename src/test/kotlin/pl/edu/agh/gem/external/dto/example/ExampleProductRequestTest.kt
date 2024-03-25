@@ -10,7 +10,7 @@ class ExampleProductRequestTest : ShouldSpec({
         // given
         val product = createProduct(
             id = "id",
-            name = "name"
+            name = "name",
         )
         // when
         val exampleProductRequest = ExampleProductRequest.from(product)
@@ -21,4 +21,4 @@ class ExampleProductRequestTest : ShouldSpec({
             it.name shouldBe "name"
         }
     }
-})
+},)

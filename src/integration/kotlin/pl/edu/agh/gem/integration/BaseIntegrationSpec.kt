@@ -12,7 +12,7 @@ import pl.edu.agh.gem.integration.environment.ProjectConfig
 
 @SpringBootTest(
     classes = [AppRunner::class],
-    webEnvironment = RANDOM_PORT
+    webEnvironment = RANDOM_PORT,
 )
 @ActiveProfiles("integration")
 abstract class BaseIntegrationSpec(body: ShouldSpec.() -> Unit) : ShouldSpec(body) {

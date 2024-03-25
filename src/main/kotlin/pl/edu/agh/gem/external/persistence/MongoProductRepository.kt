@@ -24,10 +24,10 @@ class MongoProductRepository(private val mongo: MongoTemplate) : ProductReposito
 
 private fun Product.toEntity() = ProductEntity(
     id = id,
-    name = name
+    name = name,
 )
 
 private fun ProductEntity.toDomain() = Product(
     id = id,
-    name = name
+    name = name,
 )

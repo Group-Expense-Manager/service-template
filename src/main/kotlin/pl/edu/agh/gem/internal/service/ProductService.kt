@@ -8,7 +8,7 @@ import pl.edu.agh.gem.internal.persistence.ProductRepository
 @Service
 class ProductService(
     private val productRepository: ProductRepository,
-    private val exampleClient: ExampleClient
+    private val exampleClient: ExampleClient,
 ) {
     fun find(id: String): Product {
         return productRepository.find(id) ?: throw MissingProductException(id)

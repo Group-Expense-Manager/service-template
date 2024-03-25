@@ -6,22 +6,22 @@ import pl.edu.agh.gem.internal.domain.Product
 
 fun createProduct(
     id: String = "id",
-    name: String = "name"
+    name: String = "name",
 ) = Product(
     id = id,
-    name = name
+    name = name,
 )
 
 fun createProductRequest(
-    name: String = "name"
+    name: String = "name",
 ) = ProductRequest(
-    name = name
+    name = name,
 )
 
 fun createExampleProductRespone(
     id: String = "id",
-    name: String = "name"
+    name: String = "name",
 ) = ExampleProductResponse(
     id = id,
-    name = name
+    name = name,
 )

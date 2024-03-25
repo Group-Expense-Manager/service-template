@@ -26,7 +26,7 @@ class MongoListener : BeforeProjectListener, AfterProjectListener, AfterTestList
         container = MongoDBContainer(MONGODB_IMAGE)
         container.start()
         container.waitingFor(
-            Wait.forListeningPort().withStartupTimeout(CONTAINER_STARTUP_TIMEOUT)
+            Wait.forListeningPort().withStartupTimeout(CONTAINER_STARTUP_TIMEOUT),
         )
         logger.info("MongoDB container started at port(s) ${container.replicaSetUrl}")
         client = MongoClients.create(container.replicaSetUrl)

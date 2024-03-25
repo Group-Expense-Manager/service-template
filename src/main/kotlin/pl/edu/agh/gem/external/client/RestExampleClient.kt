@@ -24,7 +24,7 @@ import pl.edu.agh.gem.internal.domain.Product
 @Component
 class RestExampleClient(
     @Qualifier("ExampleRestTemplate") val restTemplate: RestTemplate,
-    val exampleProperties: ExampleProperties
+    val exampleProperties: ExampleProperties,
 ) : ExampleClient {
 
     override fun postProduct(product: Product) {
@@ -33,7 +33,7 @@ class RestExampleClient(
                 resolveProductsAddress(),
                 POST,
                 HttpEntity(ExampleProductRequest.from(product), createHeaders()),
-                Any::class.java
+                Any::class.java,
             )
         } catch (ex: HttpClientErrorException) {
             logger.warn(ex) { "Client side exception while trying to share product: $product" }
@@ -52,8 +52,10 @@ class RestExampleClient(
                 resolveProductsAddress(productId),
                 GET,
                 HttpEntity(null, createHeaders()),
-                ExampleProductResponse::class.java
-            ).body?.toDomain() ?: throw ExampleClientException("While retrieving product using ExampleClient we receive empty body")
+                ExampleProductResponse::class.java,
+            ).body?.toDomain() ?: throw ExampleClientException(
+                "While retrieving product using ExampleClient we receive empty body",
+            )
         } catch (ex: HttpClientErrorException) {
             logger.warn(ex) { "Client side exception while trying to share product with id: $productId" }
             throw ExampleClientException(ex.message)

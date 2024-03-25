@@ -10,7 +10,7 @@ class ProductRequestTest : ShouldSpec({
     should("map correct to Product") {
         // given
         val productRequest = createProductRequest(
-            name = "name"
+            name = "name",
         )
         // when
         val product = productRequest.toDomain()
@@ -21,4 +21,4 @@ class ProductRequestTest : ShouldSpec({
             it.name shouldBe "name"
         }
     }
-})
+},)

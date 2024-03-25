@@ -21,7 +21,7 @@ object ProjectConfig : AbstractProjectConfig() {
     override fun extensions() = listOf(
         mongoListener,
         wiremockListener,
-        SpringExtension
+        SpringExtension,
     )
 
     fun updateConfiguration(registry: DynamicPropertyRegistry) {

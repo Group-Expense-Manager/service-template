@@ -12,7 +12,10 @@ buildscript {
     }
 }
 
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
+    application
+
     id("application")
     id("java")
     id("maven-publish")
@@ -25,8 +28,6 @@ plugins {
     alias(tools.plugins.scmversion)
     alias(tools.plugins.kotlin.jvm)
     alias(tools.plugins.kotlin.spring)
-
-    idea
 }
 
 application {
@@ -41,12 +42,20 @@ scm {
 }
 
 project.group = "pl.edu.agh.gem"
-project.version = scm.version.version
+project.version = "1.0.0"
 
 configurations {
     compileOnly {
         extendsFrom(configurations.annotationProcessor.get())
     }
+}
+
+val integrationCompile: Configuration by configurations.creating {
+    extendsFrom(configurations.testCompileOnly.get())
+}
+
+val integrationRuntime: Configuration by configurations.creating {
+    extendsFrom(configurations.testRuntimeOnly.get())
 }
 
 val integrationImplementation: Configuration by configurations.creating {
@@ -64,6 +73,7 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-afterburner")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-aop")
@@ -108,7 +118,6 @@ sourceSets {
         compileClasspath += project.sourceSets["main"].output + project.sourceSets["test"].output
         runtimeClasspath += project.sourceSets["main"].output + project.sourceSets["test"].output
         java.srcDir("src/integration/kotlin")
-        resources.srcDir("src/integration/resources")
     }
 }
 
@@ -132,6 +141,7 @@ tasks {
         reports {
             junitXml.required = true
         }
+        outputs.upToDateWhen { false }
     }
 
     withType<org.jlleitschuh.gradle.ktlint.tasks.BaseKtLintCheckTask> {
@@ -139,6 +149,8 @@ tasks {
     }
 
     create<Test>("integration") {
+        description = "Runs the integration tests."
+        group = "verification"
         testClassesDirs = sourceSets["integration"].output.classesDirs
         classpath = sourceSets["integration"].runtimeClasspath
         mustRunAfter("test")
@@ -146,8 +158,4 @@ tasks {
     check {
         dependsOn("integration")
     }
-}
-
-project.tasks.named("processIntegrationResources", Copy::class.java) {
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }

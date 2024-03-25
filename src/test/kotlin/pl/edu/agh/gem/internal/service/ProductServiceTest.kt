@@ -16,7 +16,7 @@ class ProductServiceTest : ShouldSpec({
     val exampleClient = mock<ExampleClient> { }
     val productService = ProductService(
         productRepository = productRepository,
-        exampleClient = exampleClient
+        exampleClient = exampleClient,
     )
 
     should("find product") {
@@ -52,4 +52,4 @@ class ProductServiceTest : ShouldSpec({
         // then
         verify(exampleClient, times(1)).postProduct(product)
     }
-})
+},)

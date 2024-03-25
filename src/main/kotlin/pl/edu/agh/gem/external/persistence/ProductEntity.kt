@@ -7,5 +7,5 @@ import org.springframework.data.mongodb.core.mapping.Document
 data class ProductEntity(
     @Id
     val id: String,
-    val name: String
+    val name: String,
 )

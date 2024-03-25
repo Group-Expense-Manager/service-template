@@ -62,7 +62,7 @@ data class SimpleError(
     private val message: String? = null,
     private val details: String? = null,
     private val path: String? = null,
-    private val userMessage: String? = null
+    private val userMessage: String? = null,
 ) : Error {
     fun withCode(code: String?) =
         this.copy(code = code)

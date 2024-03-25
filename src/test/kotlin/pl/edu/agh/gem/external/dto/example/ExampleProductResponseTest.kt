@@ -10,7 +10,7 @@ class ExampleProductResponseTest : ShouldSpec({
         // given
         val exampleProductResponse = createExampleProductRespone(
             id = "id",
-            name = "name"
+            name = "name",
         )
         // when
         val product = exampleProductResponse.toDomain()
@@ -21,4 +21,4 @@ class ExampleProductResponseTest : ShouldSpec({
             it.name shouldBe "name"
         }
     }
-})
+},)
