@@ -1,7 +1,6 @@
 package pl.edu.agh.gem.internal.service
 
 import io.kotest.core.spec.style.ShouldSpec
-import io.kotest.matchers.should
 import io.kotest.matchers.shouldBe
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.times

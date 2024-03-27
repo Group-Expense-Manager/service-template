@@ -1,5 +1,6 @@
 package pl.edu.agh.gem.external.controller
 
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.springframework.core.Ordered.LOWEST_PRECEDENCE
 import org.springframework.core.annotation.Order
 import org.springframework.http.HttpStatus.BAD_REQUEST
@@ -15,12 +16,12 @@ import pl.edu.agh.gem.internal.service.MissingProductException
 class ApiExceptionHandler {
 
     @ExceptionHandler(MissingProductException::class)
-    fun handleMissingProductException(exception: MissingProductException): ResponseEntity<ErrorsHolder> {
+    fun handleMissingProductException(exception: MissingProductException): ResponseEntity<SimpleErrorsHolder> {
         return ResponseEntity(handleError(exception), NOT_FOUND)
     }
 
     @ExceptionHandler(MethodArgumentNotValidException::class)
-    fun handleMethodArgumentNotValidException(exception: MethodArgumentNotValidException): ResponseEntity<ErrorsHolder> {
+    fun handleMethodArgumentNotValidException(exception: MethodArgumentNotValidException): ResponseEntity<SimpleErrorsHolder> {
         return ResponseEntity(handleNotValidException(exception), BAD_REQUEST)
     }
 
@@ -33,7 +34,9 @@ class ApiExceptionHandler {
                     .withUserMessage(error.defaultMessage)
                     .withMessage(error.defaultMessage)
             }
-        return SimpleErrorsHolder(errors)
+        return SimpleErrorsHolder(errors).apply {
+            jacksonObjectMapper().writeValueAsString(this)
+        }
     }
 
     private fun handleError(exception: Exception): SimpleErrorsHolder {
@@ -45,25 +48,20 @@ class ApiExceptionHandler {
         return SimpleErrorsHolder.fromError(error)
     }
 }
-
-interface Error
-
-interface ErrorsHolder
-
-data class SimpleErrorsHolder(val errors: List<Error>) : ErrorsHolder {
+data class SimpleErrorsHolder(val errors: List<SimpleError>) {
     companion object {
-        fun fromError(error: Error) =
+        fun fromError(error: SimpleError) =
             SimpleErrorsHolder(listOf(error))
     }
 }
 
 data class SimpleError(
-    private val code: String? = null,
-    private val message: String? = null,
-    private val details: String? = null,
-    private val path: String? = null,
-    private val userMessage: String? = null,
-) : Error {
+    val code: String? = null,
+    val message: String? = null,
+    val details: String? = null,
+    val path: String? = null,
+    val userMessage: String? = null,
+) {
     fun withCode(code: String?) =
         this.copy(code = code)
 
