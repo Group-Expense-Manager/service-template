@@ -1,4 +1,4 @@
-rootProject.name = "exampleService"
+rootProject.name = "service-template"
 
 dependencyResolutionManagement {
     versionCatalogs {

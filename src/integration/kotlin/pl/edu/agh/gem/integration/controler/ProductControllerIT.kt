@@ -55,9 +55,6 @@ class ProductControllerIT(
 
         // then
         response shouldHaveHttpStatus BAD_REQUEST
-        println("=====================================")
-        println(response.expectBody(SimpleErrorsHolder::class.java).returnResult().responseBody)
-        println("=====================================")
         response shouldHaveErrors {
             errors.size shouldBe 1
             errors[0].code shouldBe "VALIDATION_ERROR"

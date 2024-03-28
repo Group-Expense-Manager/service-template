@@ -18,7 +18,7 @@ fun createProductRequest(
     name = name,
 )
 
-fun createExampleProductRespone(
+fun createExampleProductResponse(
     id: String = "id",
     name: String = "name",
 ) = ExampleProductResponse(
