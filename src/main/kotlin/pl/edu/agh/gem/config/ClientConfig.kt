@@ -22,7 +22,7 @@ class ClientConfig {
 
 @ConfigurationProperties(prefix = "example")
 data class ExampleProperties(
-    var url: String,
-    var connectTimeout: Duration,
-    var readTimeout: Duration,
+    val url: String,
+    val connectTimeout: Duration,
+    val readTimeout: Duration,
 )

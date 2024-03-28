@@ -3,5 +3,7 @@ package pl.edu.agh.gem.internal.persistence
 import pl.edu.agh.gem.internal.domain.Product
 
 interface ProductRepository {
-    fun findAll(): List<Product>
+    fun find(id: String): Product?
+
+    fun save(product: Product)
 }
