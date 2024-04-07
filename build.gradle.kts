@@ -5,6 +5,7 @@ import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 buildscript {
     repositories {
         mavenCentral()
+        mavenLocal()
     }
 
     dependencies {
@@ -82,6 +83,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     implementation(libs.kotlinlogging)
+    implementation(libs.gem.lib)
 
     testImplementation(testlibs.bundles.kotest.core)
     testImplementation(testlibs.bundles.kotest.extensions)

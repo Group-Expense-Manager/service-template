@@ -31,6 +31,7 @@ dependencyResolutionManagement {
 
             library("guava", "com.google.guava:guava:33.1.0-jre")
             library("kotlinlogging", "io.github.microutils:kotlin-logging:3.0.5")
+            library("gem-lib", "pl.edu.agh.gem:gem-lib:0.1.0")
         }
         create("testlibs") {
             version("kotest", "5.8.1")

@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 import pl.edu.agh.gem.external.dto.product.ProductRequest
 import pl.edu.agh.gem.external.dto.product.ProductResponse
-import pl.edu.agh.gem.external.utils.InternalApiMediaType.APPLICATION_JSON_INTERNAL_VER_1
 import pl.edu.agh.gem.internal.service.ProductService
+import pl.edu.agh.gem.media.InternalApiMediaType.APPLICATION_JSON_INTERNAL_VER_1
 
 @RestController
 @RequestMapping("/api/products")

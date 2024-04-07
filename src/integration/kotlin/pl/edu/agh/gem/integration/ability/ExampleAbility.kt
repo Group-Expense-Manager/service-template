@@ -9,8 +9,8 @@ import org.springframework.http.HttpHeaders.ACCEPT
 import org.springframework.http.HttpHeaders.CONTENT_TYPE
 import org.springframework.http.HttpStatus.OK
 import org.springframework.http.HttpStatusCode
-import pl.edu.agh.gem.external.utils.InternalApiMediaType.APPLICATION_JSON_INTERNAL_VER_1
 import pl.edu.agh.gem.integration.environment.ProjectConfig.wiremock
+import pl.edu.agh.gem.media.InternalApiMediaType.APPLICATION_JSON_INTERNAL_VER_1
 
 private const val EXAMPLE_URL = "/api/example"
 
