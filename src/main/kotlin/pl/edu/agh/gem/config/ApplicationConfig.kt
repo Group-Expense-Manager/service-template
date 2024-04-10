@@ -18,7 +18,7 @@ class ApplicationConfig {
 
     @Bean
     fun kotlinModule() = KotlinModule.Builder()
-        .withReflectionCacheSize(REFLECTION_CACHE_SIZE)
+        .withReflectionCacheSize(512)
         .configure(NullToEmptyCollection, false)
         .configure(NullToEmptyMap, false)
         .configure(NullIsSameAsDefault, false)
@@ -34,9 +34,5 @@ class ApplicationConfig {
         return SessionLocaleResolver().apply {
             this.setDefaultLocale(ENGLISH)
         }
-    }
-
-    companion object {
-        private const val REFLECTION_CACHE_SIZE = 512
     }
 }

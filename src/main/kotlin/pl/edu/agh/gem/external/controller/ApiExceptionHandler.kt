@@ -23,9 +23,7 @@ class ApiExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException::class)
-    fun handleMethodArgumentNotValidException(
-        exception: MethodArgumentNotValidException,
-    ): ResponseEntity<SimpleErrorsHolder> {
+    fun handleMethodArgumentNotValidException(exception: MethodArgumentNotValidException): ResponseEntity<SimpleErrorsHolder> {
         return ResponseEntity(handleNotValidException(exception), BAD_REQUEST)
     }
 
