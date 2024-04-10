@@ -45,6 +45,8 @@ jobs:
 
       - name: Run tests
         run: ./gradlew clean check
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v3
