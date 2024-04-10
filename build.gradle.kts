@@ -83,7 +83,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     implementation(libs.kotlinlogging)
-    implementation(libs.gem.lib)
+    implementation(libs.lib.gem)
 
     testImplementation(testlibs.bundles.kotest.core)
     testImplementation(testlibs.bundles.kotest.extensions)
