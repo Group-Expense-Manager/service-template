@@ -4,11 +4,13 @@ dependencyResolutionManagement {
     versionCatalogs {
         create("tools") {
             version("jvm", "21")
-            version("kotlin", "1.9.22")
+            version("kotlin", "1.9.23")
 
             version("ktlint", "11.3.1")
             plugin("ktlint-core", "org.jlleitschuh.gradle.ktlint").versionRef("ktlint")
             plugin("ktlint-idea", "org.jlleitschuh.gradle.ktlint-idea").versionRef("ktlint")
+
+            plugin("detekt", "io.gitlab.arturbosch.detekt").version("1.23.6")
 
             plugin("kover", "org.jetbrains.kotlinx.kover").version("0.6.1")
 
@@ -81,6 +83,12 @@ dependencyResolutionManagement {
                     "testcontainers-mongodb",
                 ),
             )
+        }
+
+        create("detectlibs") {
+            library("detekt-compiler-wrapper", "com.braisgabin.detekt", "kotlin-compiler-wrapper").version("0.0.4")
+            library("detekt-faire", "com.github.Faire", "faire-detekt-rules").version("0.1.1")
+            library("detekt-hbmartin", "com.github.hbmartin", "hbmartin-detekt-rules").version("0.1.4")
         }
     }
 }
