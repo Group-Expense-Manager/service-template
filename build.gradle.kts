@@ -6,6 +6,10 @@ buildscript {
     repositories {
         mavenCentral()
         mavenLocal()
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/Group-Expense-Manager/gem-lib")
+        }
     }
 
     dependencies {
@@ -101,6 +105,10 @@ tasks.wrapper {
 repositories {
     mavenLocal()
     mavenCentral()
+    maven {
+        name = "GitHubPackages"
+        url = uri("https://maven.pkg.github.com/Group-Expense-Manager/gem-lib")
+    }
 }
 
 kotlin {
