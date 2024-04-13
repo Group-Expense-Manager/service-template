@@ -48,7 +48,7 @@ jobs:
         run: ./gradlew clean check
         env:
           USERNAME: ${{ github.ref_name }}
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TOKEN: ${{ secrets.LIB_TOKEN }}
 
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v3
