@@ -6,8 +6,8 @@ spring:
 resilience4j.retry:
   configs:
     default:
-      maxAttempts: 10
-      waitDuration: 1000ms
+      maxAttempts: 3
+      waitDuration: 100ms
       enableExponentialBackoff: true
       exponentialBackoffMultiplier: 2
       retryExceptions:
@@ -15,8 +15,8 @@ resilience4j.retry:
         - java.io.IOException
       ignoreExceptions: []
     exampleClient:
-      maxAttempts: 10
-      waitDuration: 1000ms
+      maxAttempts: 3
+      waitDuration: 100ms
       enableExponentialBackoff: true
       exponentialBackoffMultiplier: 2
       retryExceptions:
