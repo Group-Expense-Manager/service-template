@@ -5,6 +5,15 @@ import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 buildscript {
     repositories {
         mavenCentral()
+        mavenLocal()
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/Group-Expense-Manager/gem-lib")
+            credentials {
+                username = project.findProperty("user") as String? ?: System.getenv("USERNAME")
+                password = project.findProperty("token") as String? ?: System.getenv("TOKEN")
+            }
+        }
     }
 
     dependencies {
@@ -82,6 +91,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     implementation(libs.kotlinlogging)
+    implementation(libs.lib.gem)
 
     testImplementation(testlibs.bundles.kotest.core)
     testImplementation(testlibs.bundles.kotest.extensions)
@@ -99,6 +109,14 @@ tasks.wrapper {
 repositories {
     mavenLocal()
     mavenCentral()
+    maven {
+        name = "GitHubPackages"
+        url = uri("https://maven.pkg.github.com/Group-Expense-Manager/gem-lib")
+        credentials {
+            username = project.findProperty("user") as String? ?: System.getenv("USERNAME")
+            password = project.findProperty("token") as String? ?: System.getenv("TOKEN")
+        }
+    }
 }
 
 kotlin {

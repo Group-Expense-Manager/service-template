@@ -4,12 +4,12 @@ import io.kotest.matchers.nulls.shouldBeNull
 import io.kotest.matchers.shouldBe
 import org.springframework.http.HttpStatus.BAD_REQUEST
 import org.springframework.http.HttpStatus.OK
+import pl.edu.agh.gem.assertion.shouldHaveBody
+import pl.edu.agh.gem.assertion.shouldHaveErrors
+import pl.edu.agh.gem.assertion.shouldHaveHttpStatus
 import pl.edu.agh.gem.external.dto.product.ProductResponse
 import pl.edu.agh.gem.integration.BaseIntegrationSpec
 import pl.edu.agh.gem.integration.ability.ServiceTestClient
-import pl.edu.agh.gem.integration.assertion.shouldHaveBody
-import pl.edu.agh.gem.integration.assertion.shouldHaveErrors
-import pl.edu.agh.gem.integration.assertion.shouldHaveHttpStatus
 import pl.edu.agh.gem.internal.persistence.ProductRepository
 import pl.edu.agh.gem.util.createProduct
 import pl.edu.agh.gem.util.createProductRequest

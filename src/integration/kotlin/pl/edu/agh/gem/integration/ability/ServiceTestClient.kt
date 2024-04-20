@@ -8,7 +8,7 @@ import org.springframework.test.web.reactive.server.WebTestClient.ResponseSpec
 import org.springframework.test.web.servlet.client.MockMvcWebTestClient.bindToApplicationContext
 import org.springframework.web.context.WebApplicationContext
 import pl.edu.agh.gem.external.dto.product.ProductRequest
-import pl.edu.agh.gem.external.utils.InternalApiMediaType.APPLICATION_JSON_INTERNAL_VER_1
+import pl.edu.agh.gem.media.InternalApiMediaType.APPLICATION_JSON_INTERNAL_VER_1
 import java.net.URI
 @Component
 @Lazy

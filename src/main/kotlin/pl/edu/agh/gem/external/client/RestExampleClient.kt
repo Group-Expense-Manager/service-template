@@ -15,11 +15,11 @@ import org.springframework.web.client.RestTemplate
 import pl.edu.agh.gem.config.ExampleProperties
 import pl.edu.agh.gem.external.dto.example.ExampleProductRequest
 import pl.edu.agh.gem.external.dto.example.ExampleProductResponse
-import pl.edu.agh.gem.external.utils.InternalApiMediaType.APPLICATION_JSON_INTERNAL_VER_1
 import pl.edu.agh.gem.internal.client.ExampleClient
 import pl.edu.agh.gem.internal.client.ExampleClientException
 import pl.edu.agh.gem.internal.client.RetryableExampleClientException
 import pl.edu.agh.gem.internal.domain.Product
+import pl.edu.agh.gem.media.InternalApiMediaType.APPLICATION_JSON_INTERNAL_VER_1
 
 @Component
 class RestExampleClient(

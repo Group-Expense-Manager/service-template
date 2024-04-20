@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      packages: read
 
     steps:
     - uses: actions/checkout@v4
@@ -45,6 +46,9 @@ jobs:
 
       - name: Run tests
         run: ./gradlew clean check
+        env:
+          USERNAME: ${{ github.ref_name }}
+          TOKEN: ${{ secrets.LIB_TOKEN }}
 
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v3

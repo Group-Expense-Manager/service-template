@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
+import pl.edu.agh.gem.error.SimpleError
+import pl.edu.agh.gem.error.SimpleErrorsHolder
 import pl.edu.agh.gem.internal.service.MissingProductException
 
 @ControllerAdvice
@@ -47,33 +49,4 @@ class ApiExceptionHandler {
             .withUserMessage(exception.message)
         return SimpleErrorsHolder.fromError(error)
     }
-}
-data class SimpleErrorsHolder(val errors: List<SimpleError>) {
-    companion object {
-        fun fromError(error: SimpleError) =
-            SimpleErrorsHolder(listOf(error))
-    }
-}
-
-data class SimpleError(
-    val code: String? = null,
-    val message: String? = null,
-    val details: String? = null,
-    val path: String? = null,
-    val userMessage: String? = null,
-) {
-    fun withCode(code: String?) =
-        this.copy(code = code)
-
-    fun withMessage(message: String?) =
-        this.copy(message = message)
-
-    fun withDetails(details: String?) =
-        this.copy(details = details)
-
-    fun withPath(path: String?) =
-        this.copy(path = path)
-
-    fun withUserMessage(userMessage: String?) =
-        this.copy(userMessage = userMessage)
 }
