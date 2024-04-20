@@ -24,7 +24,7 @@ resilience4j.retry:
         - java.io.IOException
       ignoreExceptions: [ ]
 
-example:
+exampleClient:
   url: "some/url"
   read-timeout: 1000ms
   connect-timeout: 1000ms
