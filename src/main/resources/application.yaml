@@ -3,7 +3,28 @@ spring:
     mongodb:
       uri: mongodb + srv ://<username>:<pwd>@<cluster>.mongodb.net/<dbname>
 
-example:
+resilience4j.retry:
+  configs:
+    default:
+      maxAttempts: 3
+      waitDuration: 100ms
+      enableExponentialBackoff: true
+      exponentialBackoffMultiplier: 2
+      retryExceptions:
+        - org.springframework.web.client.HttpServerErrorException
+        - java.io.IOException
+      ignoreExceptions: []
+    exampleClient:
+      maxAttempts: 3
+      waitDuration: 100ms
+      enableExponentialBackoff: true
+      exponentialBackoffMultiplier: 2
+      retryExceptions:
+        - org.springframework.web.client.HttpServerErrorException
+        - java.io.IOException
+      ignoreExceptions: [ ]
+
+example-client:
   url: "some/url"
   read-timeout: 1000ms
   connect-timeout: 1000ms

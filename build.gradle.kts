@@ -91,11 +91,11 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-aop")
     implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.springframework.retry:spring-retry")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     implementation(libs.kotlinlogging)
     implementation(libs.lib.gem)
+    implementation(libs.bundles.resilience4j)
 
     testImplementation(testlibs.bundles.kotest.core)
     testImplementation(testlibs.bundles.kotest.extensions)

@@ -34,6 +34,20 @@ dependencyResolutionManagement {
             library("guava", "com.google.guava:guava:33.1.0-jre")
             library("kotlinlogging", "io.github.microutils:kotlin-logging:3.0.5")
             library("lib-gem", "pl.edu.agh.gem:lib-gem:0.1.0")
+
+            version("resilience4j", "2.2.0")
+            library("resilience4j-kotlin", "io.github.resilience4j", "resilience4j-kotlin").versionRef("resilience4j")
+            library("resilience4j-retry", "io.github.resilience4j", "resilience4j-retry").versionRef("resilience4j")
+            library("resilience4j-spring", "io.github.resilience4j", "resilience4j-spring-boot3").versionRef("resilience4j")
+
+            bundle(
+                "resilience4j",
+                listOf(
+                    "resilience4j-kotlin",
+                    "resilience4j-retry",
+                    "resilience4j-spring",
+                ),
+            )
         }
         create("testlibs") {
             version("kotest", "5.8.1")

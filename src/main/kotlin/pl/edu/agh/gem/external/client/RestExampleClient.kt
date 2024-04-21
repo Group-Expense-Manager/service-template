@@ -1,5 +1,6 @@
 package pl.edu.agh.gem.external.client
 
+import io.github.resilience4j.retry.annotation.Retry
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.http.HttpEntity
@@ -27,6 +28,7 @@ class RestExampleClient(
     val exampleProperties: ExampleProperties,
 ) : ExampleClient {
 
+    @Retry(name = "exampleClient")
     override fun postProduct(product: Product) {
         try {
             restTemplate.exchange(
@@ -46,6 +48,8 @@ class RestExampleClient(
             throw ExampleClientException(ex.message)
         }
     }
+
+    @Retry(name = "exampleClient")
     override fun getProduct(productId: String): Product {
         return try {
             restTemplate.exchange(

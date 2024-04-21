@@ -20,7 +20,7 @@ class ClientConfig {
     }
 }
 
-@ConfigurationProperties(prefix = "example")
+@ConfigurationProperties(prefix = "example-client")
 data class ExampleProperties(
     val url: String,
     val connectTimeout: Duration,
