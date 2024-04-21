@@ -1,3 +1,5 @@
+import io.gitlab.arturbosch.detekt.Detekt
+import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
@@ -6,6 +8,7 @@ buildscript {
     repositories {
         mavenCentral()
         mavenLocal()
+        maven("https://jitpack.io")
         maven {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/Group-Expense-Manager/gem-lib")
@@ -32,6 +35,7 @@ plugins {
     alias(tools.plugins.dependency.management)
     alias(tools.plugins.spring.boot)
     alias(tools.plugins.kover)
+    alias(tools.plugins.detekt)
     alias(tools.plugins.ktlint.core)
     alias(tools.plugins.ktlint.idea)
     alias(tools.plugins.scmversion)
@@ -100,6 +104,14 @@ dependencies {
     testImplementation(testlibs.archunit)
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testRuntimeOnly(testlibs.junit)
+
+    detektPlugins(detectlibs.detekt.rules.libraries)
+    detektPlugins(detectlibs.detekt.rules.ruleauthors)
+    detektPlugins(detectlibs.detekt.formatting)
+    detektPlugins(detectlibs.detekt.faire)
+    detektPlugins(detectlibs.detekt.hbmartin)
+    detektPlugins(detectlibs.detekt.compiler.wrapper)
+    detektPlugins(detectlibs.kure.potlin)
 }
 
 tasks.wrapper {
@@ -109,6 +121,7 @@ tasks.wrapper {
 repositories {
     mavenLocal()
     mavenCentral()
+    maven("https://jitpack.io")
     maven {
         name = "GitHubPackages"
         url = uri("https://maven.pkg.github.com/Group-Expense-Manager/gem-lib")
@@ -176,4 +189,24 @@ tasks {
     check {
         dependsOn("integration")
     }
+}
+
+detekt {
+    buildUponDefaultConfig = false
+    autoCorrect = true
+    config.setFrom("$projectDir/config/detekt/detekt.yml")
+}
+
+tasks.withType<Detekt>().configureEach {
+    reports {
+        html.required.set(true)
+        md.required.set(true)
+    }
+}
+
+tasks.withType<Detekt>().configureEach {
+    jvmTarget = tools.versions.jvm.get()
+}
+tasks.withType<DetektCreateBaselineTask>().configureEach {
+    jvmTarget = tools.versions.jvm.get()
 }

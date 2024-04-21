@@ -1,9 +1,11 @@
+root = true
+
 [*]
 charset = utf-8
 end_of_line = lf
 indent_size = 4
 indent_style = space
-insert_final_newline = false
+insert_final_newline = true
 max_line_length = 150
 tab_width = 4
 ij_continuation_indent_size = 8
@@ -13,6 +15,37 @@ ij_formatter_tags_enabled = false
 ij_smart_tabs = false
 ij_visual_guides = none
 ij_wrap_on_typing = false
+
+[*.{kt,kts}]
+ktlint_code_style = ktlint_official
+trim_trailing_whitespace = false
+
+[*.kt]
+mandatory_braces_loops = true
+always_use_is_true_or_is_false = true
+do_not_access_visiblefortesting = true
+exclude_files = **/*Test.kt
+do_not_split_by_regex = true
+do_not_use_direct_receiver_reference_inside_with = true
+do_not_use_has_size_for_emptylist_in_assert = true
+do_not_use_is_equal_to_when_argument_is_one = true
+do_not_use_is_equal_to_when_argument_is_zero = true
+do_not_use_property_access_in_assert = true
+do_not_use_single_on_filter = true
+do_not_use_size_property_in_assert = true
+get_or_default_should_be_replaced_with_get_or_else = true
+no_extension_function_on_nullable_receiver = true
+no_non_private_global_variables = true
+no_nullable_lambda_with_default_null = true
+no_pair_with_ambiguous_types = true
+prefer_ignore_case = true
+prevent_banned_imports = true
+return_value_of_let_must_be_used = true
+use_entries_instead_of_values_on_enum = true
+use_first_or_null_instead_of_find = true
+use_map_not_null_instead_of_filter_not_null = true
+use_of_collection_instead_of_empty_collection = true
+use_set_instead_of_list_to_set = true
 
 [.editorconfig]
 ij_editorconfig_align_group_field_declarations = false
