@@ -1,11 +1,8 @@
-#spring:
-#  data:
-#    mongodb:
-#      uri: mongodb+srv://<username>:<pwd>@<cluster>.mongodb.net/<dbname>
 
 spring:
-  profiles:
-    active : local
+  data:
+    mongodb:
+      uri: mongodb + srv ://<username>:<pwd>@<cluster>.mongodb.net/<dbname>
 
 resilience4j.retry:
   configs:
@@ -28,7 +25,7 @@ resilience4j.retry:
         - java.io.IOException
       ignoreExceptions: [ ]
 
-exampleClient:
+example-client:
   url: "some/url"
   read-timeout: 1000ms
   connect-timeout: 1000ms
