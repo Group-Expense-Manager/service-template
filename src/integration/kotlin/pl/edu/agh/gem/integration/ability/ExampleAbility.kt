@@ -5,12 +5,11 @@ import com.github.tomakehurst.wiremock.client.WireMock.aResponse
 import com.github.tomakehurst.wiremock.client.WireMock.get
 import com.github.tomakehurst.wiremock.client.WireMock.post
 import com.github.tomakehurst.wiremock.client.WireMock.urlMatching
-import org.springframework.http.HttpHeaders.ACCEPT
-import org.springframework.http.HttpHeaders.CONTENT_TYPE
 import org.springframework.http.HttpStatus.OK
 import org.springframework.http.HttpStatusCode
+import pl.edu.agh.gem.headers.HeadersTestUtils.withAppAcceptType
+import pl.edu.agh.gem.headers.HeadersTestUtils.withAppContentType
 import pl.edu.agh.gem.integration.environment.ProjectConfig.wiremock
-import pl.edu.agh.gem.media.InternalApiMediaType.APPLICATION_JSON_INTERNAL_VER_1
 
 private const val EXAMPLE_URL = "/api/example"
 
@@ -26,7 +25,7 @@ fun stubExamplePostProduct(statusCode: HttpStatusCode = OK) {
             .willReturn(
                 aResponse()
                     .withStatus(statusCode.value())
-                    .withHeader(ACCEPT, APPLICATION_JSON_INTERNAL_VER_1),
+                    .withAppAcceptType(),
             ),
     )
 }
@@ -37,7 +36,7 @@ fun stubExampleGetProduct(body: Any?, id: String, statusCode: HttpStatusCode = O
             .willReturn(
                 aResponse()
                     .withStatus(statusCode.value())
-                    .withHeader(CONTENT_TYPE, APPLICATION_JSON_INTERNAL_VER_1)
+                    .withAppContentType()
                     .withBody(
                         jacksonObjectMapper().writeValueAsString(body),
                     ),

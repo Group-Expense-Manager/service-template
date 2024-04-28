@@ -11,6 +11,7 @@ import pl.edu.agh.gem.external.dto.product.ProductResponse
 import pl.edu.agh.gem.integration.BaseIntegrationSpec
 import pl.edu.agh.gem.integration.ability.ServiceTestClient
 import pl.edu.agh.gem.internal.persistence.ProductRepository
+import pl.edu.agh.gem.util.createGemUser
 import pl.edu.agh.gem.util.createProduct
 import pl.edu.agh.gem.util.createProductRequest
 
@@ -21,16 +22,18 @@ class ProductControllerIT(
     should("find product") {
         // given
         val product = createProduct()
+        val user = createGemUser()
         productRepository.save(product)
 
         // when
-        val response = service.findProduct(product.id)
+        val response = service.findProduct(product.id, user)
 
         // then
         response shouldHaveHttpStatus OK
         response shouldHaveBody ProductResponse(
             id = product.id,
             name = product.name,
+            forUser = user.email,
         )
     }
 

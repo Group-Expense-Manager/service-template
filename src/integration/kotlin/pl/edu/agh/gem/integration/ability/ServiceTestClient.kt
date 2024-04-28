@@ -1,15 +1,17 @@
 package pl.edu.agh.gem.integration.ability
 
 import org.springframework.context.annotation.Lazy
-import org.springframework.http.HttpHeaders.ACCEPT
-import org.springframework.http.HttpHeaders.CONTENT_TYPE
 import org.springframework.stereotype.Component
 import org.springframework.test.web.reactive.server.WebTestClient.ResponseSpec
 import org.springframework.test.web.servlet.client.MockMvcWebTestClient.bindToApplicationContext
 import org.springframework.web.context.WebApplicationContext
 import pl.edu.agh.gem.external.dto.product.ProductRequest
-import pl.edu.agh.gem.media.InternalApiMediaType.APPLICATION_JSON_INTERNAL_VER_1
+import pl.edu.agh.gem.headers.HeadersUtils.addAppAcceptType
+import pl.edu.agh.gem.headers.HeadersUtils.addAppContentType
+import pl.edu.agh.gem.headers.HeadersUtils.addValidatedUser
+import pl.edu.agh.gem.security.GemUser
 import java.net.URI
+
 @Component
 @Lazy
 class ServiceTestClient(applicationContext: WebApplicationContext) {
@@ -17,17 +19,17 @@ class ServiceTestClient(applicationContext: WebApplicationContext) {
         .configureClient()
         .build()
 
-    fun findProduct(id: String): ResponseSpec {
+    fun findProduct(id: String, user: GemUser): ResponseSpec {
         return webClient.get()
             .uri(URI("/api/products/$id"))
-            .header(ACCEPT, APPLICATION_JSON_INTERNAL_VER_1)
+            .headers { it.addAppAcceptType().addValidatedUser(user) }
             .exchange()
     }
 
     fun createProduct(body: ProductRequest): ResponseSpec {
         return webClient.post()
             .uri(URI("/api/products"))
-            .header(CONTENT_TYPE, APPLICATION_JSON_INTERNAL_VER_1)
+            .headers { it.addAppContentType() }
             .bodyValue(body)
             .exchange()
     }

@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 import pl.edu.agh.gem.error.SimpleError
 import pl.edu.agh.gem.error.SimpleErrorsHolder
+import pl.edu.agh.gem.error.toSimpleErrorHolder
+import pl.edu.agh.gem.error.withCode
+import pl.edu.agh.gem.error.withDetails
+import pl.edu.agh.gem.error.withMessage
+import pl.edu.agh.gem.error.withUserMessage
 import pl.edu.agh.gem.internal.service.MissingProductException
 
 @ControllerAdvice
@@ -44,11 +49,11 @@ class ApiExceptionHandler {
     }
 
     private fun handleError(exception: Exception): SimpleErrorsHolder {
-        val error = SimpleError()
+        return SimpleError()
             .withCode(exception.javaClass.simpleName)
             .withMessage(exception.message)
             .withDetails(exception.javaClass.simpleName)
             .withUserMessage(exception.message)
-        return SimpleErrorsHolder.fromError(error)
+            .toSimpleErrorHolder()
     }
 }
