@@ -44,7 +44,7 @@ plugins {
 }
 
 application {
-    mainClass.set("pl.edu.agh.gem.AppRunner")
+    mainClass.set("pl.edu.agh.gem.AppRunnerKt")
 }
 
 scm {
@@ -188,6 +188,17 @@ tasks {
     }
     check {
         dependsOn("integration")
+    }
+
+    register("bootRunLocal") {
+        group = "application"
+        description = "Runs this project as a Spring Boot application with the local profile"
+        doFirst {
+            bootRun.configure {
+                systemProperty("spring.profiles.active", "local")
+            }
+        }
+        finalizedBy("bootRun")
     }
 }
 
