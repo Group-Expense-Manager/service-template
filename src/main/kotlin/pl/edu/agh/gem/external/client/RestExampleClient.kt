@@ -14,8 +14,8 @@ import org.springframework.web.client.RestTemplate
 import pl.edu.agh.gem.config.ExampleProperties
 import pl.edu.agh.gem.external.dto.example.ExampleProductRequest
 import pl.edu.agh.gem.external.dto.example.ExampleProductResponse
-import pl.edu.agh.gem.headers.HeadersUtils.addAppAcceptType
-import pl.edu.agh.gem.headers.HeadersUtils.addAppContentType
+import pl.edu.agh.gem.headers.HeadersUtils.withAppAcceptType
+import pl.edu.agh.gem.headers.HeadersUtils.withAppContentType
 import pl.edu.agh.gem.internal.client.ExampleClient
 import pl.edu.agh.gem.internal.client.ExampleClientException
 import pl.edu.agh.gem.internal.client.RetryableExampleClientException
@@ -33,7 +33,7 @@ class RestExampleClient(
             restTemplate.exchange(
                 resolveProductsAddress(),
                 POST,
-                HttpEntity(ExampleProductRequest.from(product), HttpHeaders().addAppAcceptType().addAppContentType()),
+                HttpEntity(ExampleProductRequest.from(product), HttpHeaders().withAppAcceptType().withAppContentType()),
                 Any::class.java,
             )
         } catch (ex: HttpClientErrorException) {
@@ -54,7 +54,7 @@ class RestExampleClient(
             restTemplate.exchange(
                 resolveProductsAddress(productId),
                 GET,
-                HttpEntity<Any>(HttpHeaders().addAppAcceptType()),
+                HttpEntity<Any>(HttpHeaders().withAppAcceptType()),
                 ExampleProductResponse::class.java,
             ).body?.toDomain() ?: throw ExampleClientException(
                 "While retrieving product using ExampleClient we receive empty body",
