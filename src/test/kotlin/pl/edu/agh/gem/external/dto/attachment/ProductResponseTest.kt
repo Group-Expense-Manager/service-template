@@ -1,4 +1,4 @@
-package pl.edu.agh.gem.external.dto.product
+package pl.edu.agh.gem.external.dto.attachment
 
 import io.kotest.core.spec.style.ShouldSpec
 import io.kotest.matchers.shouldBe
@@ -14,7 +14,7 @@ class ProductResponseTest : ShouldSpec({
         )
 
         // when
-        val productResponse = ProductResponse.from(product)
+        val productResponse = AttachmentResponse.from(product)
 
         // then
         productResponse.also {

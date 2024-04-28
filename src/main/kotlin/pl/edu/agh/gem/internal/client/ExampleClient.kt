@@ -1,11 +1,11 @@
 package pl.edu.agh.gem.internal.client
 
-import pl.edu.agh.gem.internal.domain.Product
+import pl.edu.agh.gem.internal.domain.UserAttachment
 
 interface ExampleClient {
-    fun postProduct(product: Product)
+    fun postProduct(userAttachment: UserAttachment)
 
-    fun getProduct(productId: String): Product
+    fun getProduct(productId: String): UserAttachment
 }
 
 class ExampleClientException(override val message: String?) : RuntimeException()

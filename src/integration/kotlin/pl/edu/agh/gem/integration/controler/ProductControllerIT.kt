@@ -7,28 +7,28 @@ import org.springframework.http.HttpStatus.OK
 import pl.edu.agh.gem.assertion.shouldHaveBody
 import pl.edu.agh.gem.assertion.shouldHaveErrors
 import pl.edu.agh.gem.assertion.shouldHaveHttpStatus
-import pl.edu.agh.gem.external.dto.product.ProductResponse
+import pl.edu.agh.gem.external.dto.attachment.AttachmentResponse
 import pl.edu.agh.gem.integration.BaseIntegrationSpec
 import pl.edu.agh.gem.integration.ability.ServiceTestClient
-import pl.edu.agh.gem.internal.persistence.ProductRepository
+import pl.edu.agh.gem.internal.persistence.UserAttachmentRepository
 import pl.edu.agh.gem.util.createProduct
 import pl.edu.agh.gem.util.createProductRequest
 
 class ProductControllerIT(
     private val service: ServiceTestClient,
-    private val productRepository: ProductRepository,
+    private val userAttachmentRepository: UserAttachmentRepository,
 ) : BaseIntegrationSpec({
     should("find product") {
         // given
         val product = createProduct()
-        productRepository.save(product)
+        userAttachmentRepository.save(product)
 
         // when
         val response = service.findProduct(product.id)
 
         // then
         response shouldHaveHttpStatus OK
-        response shouldHaveBody ProductResponse(
+        response shouldHaveBody AttachmentResponse(
             id = product.id,
             name = product.name,
         )

@@ -7,24 +7,24 @@ import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 import pl.edu.agh.gem.internal.client.ExampleClient
-import pl.edu.agh.gem.internal.persistence.ProductRepository
+import pl.edu.agh.gem.internal.persistence.UserAttachmentRepository
 import pl.edu.agh.gem.util.createProduct
 
 class ProductServiceTest : ShouldSpec({
-    val productRepository = mock<ProductRepository>()
+    val userAttachmentRepository = mock<UserAttachmentRepository>()
     val exampleClient = mock<ExampleClient> { }
-    val productService = ProductService(
-        productRepository = productRepository,
+    val userService = UserService(
+        userAttachmentRepository = userAttachmentRepository,
         exampleClient = exampleClient,
     )
 
     should("find product") {
         // given
         val product = createProduct()
-        whenever(productRepository.find(product.id)).thenReturn(product)
+        whenever(userAttachmentRepository.find(product.id)).thenReturn(product)
 
         // when
-        val result = productService.find(product.id)
+        val result = userService.find(product.id)
 
         // then
         result shouldBe product
@@ -35,10 +35,10 @@ class ProductServiceTest : ShouldSpec({
         val product = createProduct()
 
         // when
-        productService.save(product)
+        userService.save(product)
 
         // then
-        verify(productRepository, times(1)).save(product)
+        verify(userAttachmentRepository, times(1)).save(product)
     }
 
     should("send product") {
@@ -46,7 +46,7 @@ class ProductServiceTest : ShouldSpec({
         val product = createProduct()
 
         // when
-        productService.send(product)
+        userService.send(product)
 
         // then
         verify(exampleClient, times(1)).postProduct(product)
