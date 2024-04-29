@@ -1,9 +1,7 @@
 name: Build and Push Docker Image (Production)
 
 on:
-  pull_request:
-    branches:
-      - "main"
+  push:
 
 jobs:
   build-and-push:
