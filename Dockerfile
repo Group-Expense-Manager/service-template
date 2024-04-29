@@ -1,16 +1,15 @@
 FROM openjdk:21-jdk
 
-WORKDIR /
-COPY . .
+COPY . /app
+WORKDIR /app
 
 RUN ./gradlew build
 
-FROM adoptium/openjdk:21-jre-alpine
-
-COPY --from=builder /app/build/libs/*.jar app.jar
+RUN mkdir /app
 
 EXPOSE 8080
+COPY build/libs/app.jar /app/
 
-WORKDIR /
+WORKDIR /app/
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
