@@ -5,8 +5,6 @@ import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
-import org.springframework.http.HttpHeaders.ACCEPT
-import org.springframework.http.HttpHeaders.CONTENT_TYPE
 import org.springframework.http.HttpMethod.GET
 import org.springframework.http.HttpMethod.POST
 import org.springframework.stereotype.Component
@@ -16,11 +14,12 @@ import org.springframework.web.client.RestTemplate
 import pl.edu.agh.gem.config.ExampleProperties
 import pl.edu.agh.gem.external.dto.example.ExampleProductRequest
 import pl.edu.agh.gem.external.dto.example.ExampleProductResponse
+import pl.edu.agh.gem.headers.HeadersUtils.withAppAcceptType
+import pl.edu.agh.gem.headers.HeadersUtils.withAppContentType
 import pl.edu.agh.gem.internal.client.ExampleClient
 import pl.edu.agh.gem.internal.client.ExampleClientException
 import pl.edu.agh.gem.internal.client.RetryableExampleClientException
 import pl.edu.agh.gem.internal.domain.Product
-import pl.edu.agh.gem.media.InternalApiMediaType.APPLICATION_JSON_INTERNAL_VER_1
 
 @Component
 class RestExampleClient(
@@ -34,7 +33,7 @@ class RestExampleClient(
             restTemplate.exchange(
                 resolveProductsAddress(),
                 POST,
-                HttpEntity(ExampleProductRequest.from(product), createHeaders()),
+                HttpEntity(ExampleProductRequest.from(product), HttpHeaders().withAppAcceptType().withAppContentType()),
                 Any::class.java,
             )
         } catch (ex: HttpClientErrorException) {
@@ -55,7 +54,7 @@ class RestExampleClient(
             restTemplate.exchange(
                 resolveProductsAddress(productId),
                 GET,
-                HttpEntity(null, createHeaders()),
+                HttpEntity<Any>(HttpHeaders().withAppAcceptType()),
                 ExampleProductResponse::class.java,
             ).body?.toDomain() ?: throw ExampleClientException(
                 "While retrieving product using ExampleClient we receive empty body",
@@ -74,14 +73,10 @@ class RestExampleClient(
 
     private fun resolveProductsAddress() =
         "${exampleProperties.url}/api/example"
+
     private fun resolveProductsAddress(productId: String) =
         "${exampleProperties.url}/api/example/$productId"
 
-    private fun createHeaders() =
-        HttpHeaders().apply {
-            set(ACCEPT, APPLICATION_JSON_INTERNAL_VER_1)
-            set(CONTENT_TYPE, APPLICATION_JSON_INTERNAL_VER_1)
-        }
     companion object {
         private val logger = KotlinLogging.logger {}
     }

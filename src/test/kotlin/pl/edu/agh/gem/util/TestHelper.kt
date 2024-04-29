@@ -3,6 +3,7 @@ package pl.edu.agh.gem.util
 import pl.edu.agh.gem.external.dto.example.ExampleProductResponse
 import pl.edu.agh.gem.external.dto.product.ProductRequest
 import pl.edu.agh.gem.internal.domain.Product
+import pl.edu.agh.gem.security.GemUser
 
 fun createProduct(
     id: String = "id",
@@ -24,4 +25,12 @@ fun createExampleProductResponse(
 ) = ExampleProductResponse(
     id = id,
     name = name,
+)
+
+fun createGemUser(
+    id: String = "id",
+    email: String = "email",
+) = GemUser(
+    id = id,
+    email = email,
 )

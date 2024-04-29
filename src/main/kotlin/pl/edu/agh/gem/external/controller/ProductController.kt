@@ -13,6 +13,8 @@ import pl.edu.agh.gem.external.dto.product.ProductRequest
 import pl.edu.agh.gem.external.dto.product.ProductResponse
 import pl.edu.agh.gem.internal.service.ProductService
 import pl.edu.agh.gem.media.InternalApiMediaType.APPLICATION_JSON_INTERNAL_VER_1
+import pl.edu.agh.gem.security.GemAuthenticatedUser
+import pl.edu.agh.gem.security.GemUser
 
 @RestController
 @RequestMapping("/api/products")
@@ -24,9 +26,10 @@ class ProductController(
     @ResponseStatus(OK)
     fun findOne(
         @PathVariable id: String,
+        @GemAuthenticatedUser user: GemUser,
     ): ProductResponse {
         val product = productService.find(id)
-        return ProductResponse.from(product)
+        return ProductResponse.from(product, user)
     }
 
     @PostMapping(consumes = [APPLICATION_JSON_INTERNAL_VER_1])
