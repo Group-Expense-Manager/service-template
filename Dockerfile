@@ -1,15 +1,16 @@
 FROM openjdk:21-jdk
 
-COPY . /app
 WORKDIR /app
+COPY . .
 
 RUN ./gradlew build
 
-RUN mkdir /app
+FROM openjdk:21-jdk
+
+COPY --from=builder /app/build/libs/*.jar app.jar
 
 EXPOSE 8080
-COPY build/libs/app.jar /app/
 
-WORKDIR /app/
+WORKDIR /app
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
