@@ -5,7 +5,7 @@ COPY . .
 
 RUN ./gradlew build
 
-FROM openjdk:21-jdk
+FROM openjdk:21-jre
 
 COPY --from=builder /app/build/libs/*.jar app.jar
 
