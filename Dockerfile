@@ -14,8 +14,6 @@ WORKDIR /app
 
 COPY --from=builder /app/build/libs/*[0-9].[0-9].[0-9].jar /app/app.jar
 
-# Expose the port
 EXPOSE 4001
 
-# Run the application
 CMD ["java", "-Dspring.profiles.active=local", "-jar", "app.jar"]
