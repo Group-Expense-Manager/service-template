@@ -1,4 +1,4 @@
-FROM adoptium/openjdk:21-jdk-alpine AS builder
+FROM openjdk:21-jdk
 
 WORKDIR /
 COPY . .
