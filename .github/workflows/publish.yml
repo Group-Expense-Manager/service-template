@@ -1,7 +1,8 @@
 name: Build and Push Docker Image
 
 on:
-  push:
+  release:
+    types: [published]
 
 jobs:
   build-and-push:
@@ -12,6 +13,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Extract version from tag
+        id: extract_version
+        run: |
+          version=$(echo "${{ github.event.release.tag_name }}" | sed -n 's/^v//p')
+          echo "::set-output name=version::$version"
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
@@ -28,7 +35,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest,${{ steps.extract_version.outputs.version }}
           secrets: |
             USERNAME=${{ secrets.DOCKERHUB_USERNAME }}
             LIB_TOKEN=${{ secrets.LIB_TOKEN }}
