@@ -1,5 +1,9 @@
 FROM amazoncorretto:21-alpine-jdk AS builder
 
+ENV LIB_TOKEN=${LIB_TOKEN}
+ENV USERNAME=${USERNAME}
+
+
 RUN apk --no-cache add make
 
 WORKDIR /app
