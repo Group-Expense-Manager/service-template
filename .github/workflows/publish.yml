@@ -35,7 +35,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest,${{ steps.extract_version.outputs.version }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest,${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:${{ steps.extract_version.outputs.version }}
           secrets: |
             USERNAME=${{ secrets.DOCKERHUB_USERNAME }}
             LIB_TOKEN=${{ secrets.LIB_TOKEN }}
