@@ -12,7 +12,7 @@ FROM amazoncorretto:21-alpine-jdk
 
 WORKDIR /app
 
-COPY --from=builder /app/build/libs/*[0-9].[0-9].[0-9].jar /app/app.jar
+COPY --from=builder /app/build/libs/*.jar /app/app.jar
 
 EXPOSE 4001
 

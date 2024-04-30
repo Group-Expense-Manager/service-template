@@ -200,24 +200,28 @@ tasks {
         }
         finalizedBy("bootRun")
     }
+
+    getByName<Jar>("jar") {
+        enabled = false
+    }
+
+    withType<Detekt>().configureEach {
+        reports {
+            html.required.set(true)
+            md.required.set(true)
+        }
+    }
+
+    withType<Detekt>().configureEach {
+        jvmTarget = tools.versions.jvm.get()
+    }
+    withType<DetektCreateBaselineTask>().configureEach {
+        jvmTarget = tools.versions.jvm.get()
+    }
 }
 
 detekt {
     buildUponDefaultConfig = false
     autoCorrect = true
     config.setFrom("$projectDir/config/detekt/detekt.yml")
-}
-
-tasks.withType<Detekt>().configureEach {
-    reports {
-        html.required.set(true)
-        md.required.set(true)
-    }
-}
-
-tasks.withType<Detekt>().configureEach {
-    jvmTarget = tools.versions.jvm.get()
-}
-tasks.withType<DetektCreateBaselineTask>().configureEach {
-    jvmTarget = tools.versions.jvm.get()
 }
