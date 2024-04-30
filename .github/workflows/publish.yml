@@ -42,6 +42,5 @@ jobs:
             USERNAME=${{ secrets.DOCKERHUB_USERNAME }}
             LIB_TOKEN=${{ secrets.LIB_TOKEN }}
           build-args: |
-            -x test
             user=${{ github.ref_name }}
             token=${{ secrets.LIB_TOKEN }}
