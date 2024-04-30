@@ -1,7 +1,4 @@
-spring:
-  data:
-    mongodb:
-      database: service_template_db
-      password: admin
-      username: admin
-      authentication-database: admin
+data:
+  mongodb:
+    uri: mongodb + srv ://<username>:<pwd>@<cluster>.mongodb.net/<dbname>
+
