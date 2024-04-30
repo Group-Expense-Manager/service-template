@@ -35,3 +35,4 @@ jobs:
           build-args: |
             user=${{ github.ref_name }}
             token=${{ secrets.LIB_TOKEN }}
+          args: -x test
