@@ -1,8 +1,10 @@
 FROM amazoncorretto:21-alpine-jdk AS builder
 
-ENV LIB_TOKEN=${LIB_TOKEN}
-ENV USERNAME=${USERNAME}
+ARG user
+ARG token
 
+ENV USERNAME=$user
+ENV TOKEN=$token
 
 RUN apk --no-cache add make
 

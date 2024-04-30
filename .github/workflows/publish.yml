@@ -30,5 +30,8 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/clockbox:latest
           secrets: |
-            USERNAME=${{ github.ref_name }}
+            USERNAME=${{ secrets.DOCKERHUB_USERNAME }}
             LIB_TOKEN=${{ secrets.LIB_TOKEN }}
+          build-args: |
+            user=${{ github.ref_name }}
+            token=${{ secrets.LIB_TOKEN }}
