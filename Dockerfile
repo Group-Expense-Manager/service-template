@@ -1,4 +1,4 @@
-FROM amazoncorretto:21-alpine-jdk AS builder
+FROM gradle:8.5.0-jdk21 AS build
 
 ARG user
 ARG token
@@ -6,20 +6,13 @@ ARG token
 ENV USERNAME=$user
 ENV TOKEN=$token
 
-RUN apk --no-cache add make
-
-WORKDIR /app
-
-COPY . .
-
-RUN ./gradlew build -x test
+COPY --chown=gradle:gradle . /home/gradle/src
+WORKDIR /home/gradle/src
+RUN gradle clean bootJar --no-daemon
 
 FROM amazoncorretto:21-alpine-jdk
-
+RUN mkdir /app
+COPY --from=build /home/gradle/src/build/libs/*.jar /app/app.jar
 WORKDIR /app
-
-COPY --from=builder /app/build/libs/*.jar /app/app.jar
-
-EXPOSE 4001
-
-CMD ["java", "-Dspring.profiles.active=prod", "-jar", "app.jar"]
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=prod", "app.jar"]
