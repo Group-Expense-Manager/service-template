@@ -7,10 +7,13 @@ import com.fasterxml.jackson.module.kotlin.KotlinFeature.NullToEmptyMap
 import com.fasterxml.jackson.module.kotlin.KotlinFeature.SingletonSupport
 import com.fasterxml.jackson.module.kotlin.KotlinFeature.StrictNullChecks
 import com.fasterxml.jackson.module.kotlin.KotlinModule
+import jakarta.annotation.PostConstruct
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.servlet.LocaleResolver
 import org.springframework.web.servlet.i18n.SessionLocaleResolver
+import pl.edu.agh.gem.locale.LocaleTime.EUROPE_WARSAW
+import java.util.*
 import java.util.Locale.ENGLISH
 
 @Configuration
@@ -34,6 +37,11 @@ class ApplicationConfig {
         return SessionLocaleResolver().apply {
             this.setDefaultLocale(ENGLISH)
         }
+    }
+
+    @PostConstruct
+    fun init() {
+        TimeZone.setDefault(TimeZone.getTimeZone(EUROPE_WARSAW))
     }
 
     companion object {
