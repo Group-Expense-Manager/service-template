@@ -12,7 +12,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: admin
       MONGO_INITDB_DATABASE: service_template_db
 
-  mongo-expres:
+  mongo-express:
     container_name: mongo-express
     image: mongo-express
     restart: always
