@@ -13,8 +13,8 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.web.servlet.LocaleResolver
 import org.springframework.web.servlet.i18n.SessionLocaleResolver
 import pl.edu.agh.gem.locale.LocaleTime.EUROPE_WARSAW
-import java.util.TimeZone
 import java.util.Locale.ENGLISH
+import java.util.TimeZone
 
 @Configuration
 class ApplicationConfig {
