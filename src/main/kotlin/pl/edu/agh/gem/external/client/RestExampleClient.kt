@@ -19,7 +19,7 @@ import pl.edu.agh.gem.headers.HeadersUtils.withAppContentType
 import pl.edu.agh.gem.internal.client.ExampleClient
 import pl.edu.agh.gem.internal.client.ExampleClientException
 import pl.edu.agh.gem.internal.client.RetryableExampleClientException
-import pl.edu.agh.gem.internal.domain.Product
+import pl.edu.agh.gem.internal.model.Product
 
 @Component
 class RestExampleClient(

@@ -2,7 +2,7 @@ package pl.edu.agh.gem.internal.service
 
 import org.springframework.stereotype.Service
 import pl.edu.agh.gem.internal.client.ExampleClient
-import pl.edu.agh.gem.internal.domain.Product
+import pl.edu.agh.gem.internal.model.Product
 import pl.edu.agh.gem.internal.persistence.ProductRepository
 
 @Service

@@ -1,6 +1,6 @@
 package pl.edu.agh.gem.internal.persistence
 
-import pl.edu.agh.gem.internal.domain.Product
+import pl.edu.agh.gem.internal.model.Product
 
 interface ProductRepository {
     fun find(id: String): Product?
