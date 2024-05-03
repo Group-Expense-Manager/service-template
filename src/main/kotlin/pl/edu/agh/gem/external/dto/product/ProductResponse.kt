@@ -1,6 +1,6 @@
 package pl.edu.agh.gem.external.dto.product
 
-import pl.edu.agh.gem.internal.domain.Product
+import pl.edu.agh.gem.internal.model.Product
 import pl.edu.agh.gem.security.GemUser
 
 data class ProductResponse(

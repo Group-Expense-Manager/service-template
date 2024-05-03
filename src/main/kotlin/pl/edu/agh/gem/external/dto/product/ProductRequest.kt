@@ -1,7 +1,7 @@
 package pl.edu.agh.gem.external.dto.product
 
 import jakarta.validation.constraints.NotBlank
-import pl.edu.agh.gem.internal.domain.Product
+import pl.edu.agh.gem.internal.model.Product
 import java.util.UUID
 
 data class ProductRequest(

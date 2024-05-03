@@ -1,6 +1,6 @@
 package pl.edu.agh.gem.internal.client
 
-import pl.edu.agh.gem.internal.domain.Product
+import pl.edu.agh.gem.internal.model.Product
 
 interface ExampleClient {
     fun postProduct(product: Product)

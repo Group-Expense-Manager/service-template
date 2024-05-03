@@ -1,6 +1,6 @@
 package pl.edu.agh.gem.external.dto.example
 
-import pl.edu.agh.gem.internal.domain.Product
+import pl.edu.agh.gem.internal.model.Product
 
 data class ExampleProductRequest(
     val id: String,

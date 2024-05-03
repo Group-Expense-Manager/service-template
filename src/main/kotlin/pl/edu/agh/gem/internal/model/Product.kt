@@ -1,4 +1,4 @@
-package pl.edu.agh.gem.internal.domain
+package pl.edu.agh.gem.internal.model
 
 data class Product(
     val id: String,

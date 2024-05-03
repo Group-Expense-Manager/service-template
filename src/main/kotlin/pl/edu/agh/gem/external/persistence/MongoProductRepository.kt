@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.query.Query
 import org.springframework.data.mongodb.core.query.isEqualTo
 import org.springframework.data.mongodb.core.query.where
 import org.springframework.stereotype.Repository
-import pl.edu.agh.gem.internal.domain.Product
+import pl.edu.agh.gem.internal.model.Product
 import pl.edu.agh.gem.internal.persistence.ProductRepository
 
 @Repository
