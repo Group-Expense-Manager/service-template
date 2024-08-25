@@ -1,6 +1,5 @@
 package pl.edu.agh.gem.external.controller
 
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.springframework.core.Ordered.LOWEST_PRECEDENCE
 import org.springframework.core.annotation.Order
 import org.springframework.http.HttpStatus.BAD_REQUEST
@@ -43,8 +42,6 @@ class ApiExceptionHandler {
                     .withUserMessage(error.defaultMessage)
                     .withMessage(error.defaultMessage)
             }
-        return SimpleErrorsHolder(errors).apply {
-            jacksonObjectMapper().writeValueAsString(this)
-        }
+        return SimpleErrorsHolder(errors)
     }
 }
